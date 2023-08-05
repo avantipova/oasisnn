@@ -12,7 +12,7 @@ Emotion detection is a cornerstone of Affective Computing, with applications spa
 Our project is built upon a comprehensive multimodal psychophysiological database. This dataset encompasses eye-tracking data, galvanic skin response (GSR) readings, and heart-rate variability measurements.
 
 ### Deep Learning Approach
-EmoEye employs advanced Deep Learning techniques to unravel emotions. Our model is designed to process a variety of data types, including scanpaths, GSR data, heart-rate signals, and images viewed by participants.
+EmoEye employs advanced Deep Learning techniques to unravel emotions. Our model is designed to process a variety of data types, including scanpaths, GSR data, heart-rate signals, evoked by images viewed by participants.
 
 ## Commercial Endeavors
 
@@ -33,6 +33,6 @@ We welcome contributions from the community! If you have ideas to enhance, optim
 
 ## Contact
 
-For inquiries or collaboration opportunities, please reach out to [mailto:info@leo-neurolab.ru](mailto:mailto:info@leo-neurolab.ru).
+For inquiries or collaboration opportunities, please reach out to [info@leo-neurolab.ru](mailto:mailto:info@leo-neurolab.ru).
 
 Thank you for joining us in the EmoEye project journey!
