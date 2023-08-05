@@ -16,8 +16,8 @@ def preprocess_gaze(
     Analyze gaze gaze and extract relevant information.
 
     Args:
-        gaze_path (str): Path to the gaze data CSV file.
-        info_path (str): Path to the info data CSV file.
+        gaze_path (str): Path to the gaze data CSV file. Should contain the following columns: 'FPOGX', 'FPOGY', 'LPMM', 'RPMM', 'GSR', 'HR'
+        info_path (str): Path to the info data CSV file. Should contain the following columns: 'start_time_system', 'time_Images', 'form_response'
         fmin (float, optional): Minimum frequency for bandpass filter. Defaults to 0.1.
         fmax (float, optional): Maximum frequency for bandpass filter. Defaults to 3.
         fs (int, optional): Sampling frequency. Defaults to 61.
