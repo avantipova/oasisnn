@@ -1,6 +1,8 @@
 import os
 import matplotlib.pyplot as plt
+import matplotlib.colors as mc
 import numpy as np
+import pandas as pd
 
 
 def plot_distribution(data: list[int | float], title: str = '', xlabel: str = 'Data', ylabel: str = 'Frequency', bins: int = 30) -> plt.Figure:
@@ -83,5 +85,53 @@ def plot_image_with_scatter(valence: np.ndarray, arousal: np.ndarray, img: str |
     ax2.set_ylabel('Arousal')
     ax2.set_xlabel('Valence')
     ax2.legend(['mean', 'individual'], loc='upper right')
+
+    return fig
+
+
+def plot_confusion_matrix(
+    confusion_matrix_df: pd.DataFrame,
+    title: str = "Confusion Matrix Heatmap",
+    cbar: bool = False,
+    cmap: str | mc.Colormap = plt.cm.Blues
+) -> plt.Figure:
+    """
+    Visualize a confusion matrix stored in a pandas DataFrame using a heatmap.
+
+    Args:
+        confusion_matrix_df (pd.DataFrame): Confusion matrix as a DataFrame.
+        title (str, optional): Title for the plot. Defaults to "Confusion Matrix Heatmap".
+        cbar (bool, optional): Whether to show a colorbar. Defaults to False.
+        cmap (Union[str, plt.Colormap], optional): Colormap to use. Defaults to plt.cm.Blues.
+
+    Returns:
+        plt.Figure: Matplotlib Figure object containing the confusion matrix plot.
+    """
+    fig, ax = plt.subplots(figsize=(10, 7))
+    im = ax.imshow(confusion_matrix_df, interpolation="nearest", cmap=cmap)
+    ax.set_title(title)
+    if cbar:
+        cbar = ax.figure.colorbar(im, ax=ax)
+    tick_marks = range(len(confusion_matrix_df.columns))
+
+    if any([not isinstance(column, (int, float)) and len(column) > 5 for column in confusion_matrix_df.columns]):
+        ax.set_xticks(tick_marks)
+        ax.set_xticklabels(confusion_matrix_df.columns, rotation=45)
+    else:
+        ax.set_xticks(tick_marks)
+        ax.set_xticklabels(confusion_matrix_df.columns)
+
+    ax.set_yticks(tick_marks)
+    ax.set_yticklabels(confusion_matrix_df.index)
+
+    for i in range(len(confusion_matrix_df.index)):
+        for j in range(len(confusion_matrix_df.columns)):
+            cell_value = confusion_matrix_df.iloc[i, j]
+            text_color = "#eee" if cell_value > confusion_matrix_df.max().max() / 2 else "#333"
+            ax.text(j, i, str(cell_value), ha="center", va="center", color=text_color)
+
+    ax.set_xlabel("Predicted Labels")
+    ax.set_ylabel("True Labels")
+    fig.tight_layout()
 
     return fig
